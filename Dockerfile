@@ -42,6 +42,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Collect static files during build (optional)
+# if you want to collect static files at runtime, you can skip this step and run it in the entrypoint script instead
+# for example if you use aws s3 for static files, you might want to collect static files at runtime to avoid having stale files in the image
+# create separate entrypoint script to run collectstatic and migrations at runtime, and set the entrypoint to that script instead of running collectstatic here
 RUN python manage.py collectstatic --noinput
 
 # Switch to non-root user
